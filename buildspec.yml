@@ -1,0 +1,32 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in the install phase...
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+      - $(aws ecr get-login --region us-east-1) 
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn install
+      - echo Building the Docker image... 
+      - docker build -t awsecsdemo1 .
+      - docker tag awsecsdemo1:latest 932833910912.dkr.ecr.us-east-1.amazonaws.com/awscoedemo1
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 932833910912.dkr.ecr.us-east-1.amazonaws.com/awscoedemo1
+
+artifacts:
+  files:
+    - 'target/LoginWebApp.war'
+#    - 'scripts/instlltomcat.sh'
+    - 'appspec.yml'
+    - 'Dockerfile'
+#    - 'scripts/restarttomcat.sh'
+#    - 'scripts/starttomcat.sh'
