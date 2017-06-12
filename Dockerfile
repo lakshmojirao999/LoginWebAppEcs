@@ -1,3 +1,2 @@
-FROM tomcat:latest
-MAINTAINER kgv version: 0.1
-COPY target/LoginWebApp.war /usr/local/tomcat/webapps/
+FROM maven:3.3.9-jdk-8
+RUN echo "Hello From Maven docker"
