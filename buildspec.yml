@@ -4,7 +4,6 @@ phases:
   install:
     commands:
       - echo Nothing to do in the install phase...
-      - mvn install
   pre_build:
     commands:
       - echo Nothing to do in the pre_build phase...
