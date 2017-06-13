@@ -12,8 +12,9 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image...      
-      - docker run --rm -v "$PWD":/app -w /app $IMAGE_REPO_NAME mvn install
+      - echo Building the Docker image...
+      - echo $(ls)
+      - docker run --rm -v "$PWD":/app -w /app fishead/docker-tomcat-maven mvn install
       - docker build -t $IMAGE_REPO_NAME .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
 
